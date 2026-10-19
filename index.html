@@ -2,7 +2,8 @@
 <html lang="sr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Blokiran zum na mobilnim uređajima -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#f6f6f3">
 <meta name="description" content="Rent A Car KG u Kragujevcu. Renault Clio, Renault Megane i Peugeot 2008. Direktan dogovor i jasni uslovi najma.">
 <title>Rent A Car KG | Iznajmljivanje automobila u Kragujevcu</title>
@@ -21,12 +22,14 @@
 --accent-hover:#d6d6ce;
 --dark:#171915;
 --max:1280px;
---radius:16px
 }
+
+/* Osnovna zaštita od skrolovanja levo-desno */
+html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased;}
 body.menu-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
@@ -38,7 +41,6 @@ h2{font-size:clamp(34px,4.4vw,58px);line-height:1.04;margin-bottom:18px}
 .container{width:min(calc(100% - 64px),var(--max));margin-inline:auto}
 .section{padding:104px 0}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase;color:#6b7065}
-.eyebrow:before{display:none}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:42px}
 .section-head h2{margin:16px 0 0}
 .section-head>p,.head-copy{max-width:390px;color:var(--muted);font-size:13px;line-height:1.9;margin-bottom:3px}
@@ -83,27 +85,23 @@ h2{font-size:clamp(34px,4.4vw,58px);line-height:1.04;margin-bottom:18px}
 .hero-buttons .btn-outline{border-color:rgba(255,255,255,.48);background:transparent;color:#fff}
 .hero-buttons .btn-outline:hover{background:rgba(255,255,255,.12)}
 
-/* BRAND STRIP */
-.brand-strip{padding:30px 0;border-bottom:1px solid var(--line)}
-.brand-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand-strip p{max-width:250px;margin:0;color:var(--muted);font-size:11px;line-height:1.7}
-.brand-name{font:800 clamp(12px,1.4vw,18px) Manrope,sans-serif;letter-spacing:1.4px;color:#85877f;white-space:nowrap}
-
-/* VEHICLES */
-.vehicle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
-.vehicle-card{min-width:0;overflow:hidden;border:1px solid #e6e7e1;border-radius:10px;background:#fff;transition:transform .25s,box-shadow .25s}
-.vehicle-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(26,28,20,.09)}
-.vehicle-image{position:relative;height:310px;overflow:hidden;background:#e7e9e3;cursor:zoom-in}
-.vehicle-image img{transition:transform .55s}
-.vehicle-card:hover .vehicle-image img{transform:scale(1.045)}
-.vehicle-tag{position:absolute;top:14px;left:14px;padding:8px 10px;border-radius:4px;background:rgba(255,255,255,.94);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
-.vehicle-number{position:absolute;right:14px;top:15px;color:#fff;text-shadow:0 1px 8px #000;font-size:10px;letter-spacing:1px}
-.vehicle-body{padding:23px 21px 24px}
-.vehicle-meta{display:flex;justify-content:space-between;gap:8px;margin-bottom:12px;color:var(--muted);font-size:9px;letter-spacing:.8px;font-weight:700}
-.vehicle-body h3{font-size:25px;letter-spacing:-1px;margin-bottom:10px}
-.vehicle-body p{margin-bottom:0;color:var(--muted);font-size:12px;line-height:1.85}
-.fleet-note{margin:20px 0 0;color:var(--muted);font-size:10px;line-height:1.8}
-.text-link{display:inline-flex;align-items:center;gap:9px;padding-bottom:5px;border-bottom:1px solid #b9bcb1;font-size:11px;font-weight:800}
+/* VOZILA (Novi harmonika dizajn) */
+.vehicle-accordion-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
+.v-item { border: 2px solid var(--line); border-radius: 8px 45px 8px 8px; background: #fff; overflow: hidden; transition: all .3s ease; }
+.v-item.active { border-color: #161714; box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+.v-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 24px 30px; background: transparent; border: none; font: 800 22px Manrope, sans-serif; cursor: pointer; color: #161714; text-align: left; }
+.v-question:hover { background: #fafaf8; }
+.v-item.active .v-question { border-bottom: 1px solid #f0f0ed; }
+.v-icon { width: 34px; height: 34px; border: 1px solid #e0e1da; border-radius: 50%; display: grid; place-items: center; transition: transform .2s, background .2s; font-size: 22px; font-weight: 400; flex: none; }
+.v-item.active .v-icon { transform: rotate(45deg); background: #161714; color: #fff; border-color: #161714; }
+.v-answer { display: none; padding: 24px 30px 30px; }
+.v-item.active .v-answer { display: block; }
+.v-answer-inner { display: flex; gap: 24px; align-items: center; }
+.v-image-wrapper { width: 240px; height: 140px; border-radius: 8px; overflow: hidden; flex-shrink: 0; cursor: zoom-in; position: relative; background: #e7e9e3; }
+.v-image-wrapper img { transition: transform 0.5s; }
+.v-image-wrapper:hover img { transform: scale(1.05); }
+.v-answer-content h4 { margin: 0 0 8px; font: 800 14px Manrope, sans-serif; letter-spacing: 0.5px; text-transform: uppercase; color: #161714; }
+.v-answer-content p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--muted); }
 
 /* WHY US */
 .features{background:#e9eae6}
@@ -117,7 +115,7 @@ h2{font-size:clamp(34px,4.4vw,58px);line-height:1.04;margin-bottom:18px}
 .feature-copy h3{font-size:25px;letter-spacing:-1px;margin-bottom:10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
 .feature-copy p{max-width:300px;margin:0;color:rgba(255,255,255,.9);font-size:11px;line-height:1.8}
 
-/* FOUR STEPS — ROCKET UPGRADE */
+/* FOUR STEPS */
 .steps-section{background:#111310; color:#fff; position: relative; overflow: hidden;}
 .steps-section .eyebrow { color:#a8aba1; }
 .steps-section .section-head h2 { color:#fff; }
@@ -153,18 +151,19 @@ h2{font-size:clamp(34px,4.4vw,58px);line-height:1.04;margin-bottom:18px}
 .g-text { font-size: 13px; line-height: 1.6; color: #3c4043; margin: 0; }
 .reviews-action { margin-top: 40px; text-align: center; }
 
-/* FAQ — ROCKET PROFI LOOK WITH BLACK BORDER */
-.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}
-.faq-intro p{max-width:340px;color:var(--muted);font-size:12px;line-height:1.9}
+/* FAQ — NOVI DIZAJN: CRNE IVICE OKO CELE KARTICE, BEZ LEVE STRANE */
+.faq-grid { display: block; max-width: 800px; margin: 0 auto; }
+.faq-grid .section-head { flex-direction: column; align-items: center; text-align: center; max-width: 100%; margin-bottom: 48px; }
+.faq-grid .section-head h2 { margin-top: 12px; }
 .faq-list{border-top: 0;}
-.faq-item{margin-bottom:14px;border:1px solid #e5e6e0; border-left: 6px solid #161714; border-radius:8px;background:#ffffff;overflow:hidden;transition:all .2s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.03);}
-.faq-item:hover { border-color: #c9cac2; border-left-color: #161714; }
-.faq-item.active{border-color:#161714; box-shadow:0 8px 25px rgba(0,0,0,0.08)}
+.faq-item{margin-bottom:14px; border: 2px solid #161714; border-radius:10px; background:#ffffff; overflow:hidden; transition:all .2s ease; box-shadow: 4px 4px 0px rgba(22,23,20,0.05);}
+.faq-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px rgba(22,23,20,0.1); }
+.faq-item.active { box-shadow: 4px 4px 0px #161714; transform: translate(-2px, -2px); }
 .faq-question{display:flex;justify-content:space-between;align-items:center;gap:20px;width:100%;padding:22px 24px;border:0;background:#ffffff;text-align:left;font:800 15px/1.4 Manrope,sans-serif;letter-spacing:-.3px; color:#161714; cursor:pointer; transition: background 0.2s;}
 .faq-question:hover { background: #fafaf8; }
-.faq-item.active .faq-question { border-bottom: 1px solid #f0f0ed; }
-.faq-question span:last-child{display:grid;place-items:center;width:32px;height:32px;border:1px solid #e0e1da;border-radius:50%;background:#f6f6f3;font-size:19px;line-height:1;flex:none;transition:transform .2s,background .2s}
-.faq-answer{display:none;padding:22px 55px 24px 24px;background:#ffffff;color:#454a3d;font-size:13px;line-height:1.9; font-weight:500;}
+.faq-item.active .faq-question { border-bottom: 2px solid #161714; }
+.faq-question span:last-child{display:grid;place-items:center;width:32px;height:32px;border:1px solid #161714;border-radius:50%;background:#ffffff;font-size:19px;line-height:1;flex:none;transition:transform .2s,background .2s}
+.faq-answer{display:none;padding:22px 24px;background:#ffffff;color:#454a3d;font-size:13px;line-height:1.9; font-weight:500;}
 .faq-item.active .faq-answer{display:block}
 .faq-item.active .faq-question span:last-child{transform:rotate(45deg);background:#161714; color: #fff; border-color:#161714}
 
@@ -215,9 +214,6 @@ html{scroll-behavior:auto}
 .nav-phone{display:none}
 .hero-visual{min-height:540px}
 .hero-content{padding-left:5%}
-.vehicle-image{height:260px}
-.vehicle-body{padding:17px 14px}
-.vehicle-body h3{font-size:21px}
 .feature-card{min-height:330px}
 .contact-info{padding:35px}
 .steps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -227,35 +223,23 @@ html{scroll-behavior:auto}
 @media(max-width:760px){
 .container{width:calc(100% - 36px)}
 .section{padding:72px 0}
-.section-head{align-items:flex-start;flex-direction:column;gap:14px;margin-bottom:28px}
-.section-head>p,.head-copy{max-width:100%}
 .nav{min-height:70px}
 .logo-mark{width:38px;height:38px}
 .nav-actions>.btn{min-height:42px;padding:0 12px;font-size:10px}
 .menu-toggle{display:flex}
 .nav-links{position:fixed;inset:70px 0 0;z-index:101;display:flex;align-items:stretch;justify-content:flex-start;flex-direction:column;gap:0;overflow-y:auto;padding:24px 22px 38px;background:var(--bg);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,visibility .2s,transform .2s}
 .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-links>a{padding:17px 0;border-bottom:1px solid var(--line);color:var(--ink);font:800 23px Manrope,sans-serif;letter-spacing:-.8px}
+.nav-links>a{padding:17px 0;border-bottom:1px solid var(--line);color:var(--ink);font:700 23px Manrope,sans-serif;letter-spacing:-.8px}
 .hero{padding:12px 0 35px}
-/* Smanjen prazan prostor na telefonu za Hero sekciju */
 .hero-visual{min-height:420px; border-radius:8px; justify-content:flex-end;}
 .hero-visual>img{object-position:58% center}
 .hero-content{padding:40px 20px 24px}
 .hero h1{font-size:clamp(42px,11vw,65px);letter-spacing:-2px;margin:15px 0 15px}
 .hero-description{font-size:13px; margin-bottom: 22px;}
-.hero-bottom{align-items:flex-start;flex-direction:column;margin-top:35px;gap:23px}
-.hero-stats{width:100%;justify-content:space-between;gap:10px}
-.hero-stat strong{font-size:20px}
-.hero-stat span{font-size:9px}
-.brand-strip{padding:23px 0}
-.brand-strip-inner{flex-wrap:wrap;justify-content:flex-start;gap:18px 23px}
-.brand-strip p{width:100%;max-width:100%}
-.brand-name{font-size:12px}
-.vehicle-grid{grid-template-columns:1fr;gap:16px}
-.vehicle-image{height:clamp(260px,72vw,410px)}
-.vehicle-body{padding:21px}
-.vehicle-body h3{font-size:25px}
-.vehicle-body p{min-height:0}
+.v-answer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+.v-image-wrapper { width: 100%; height: 180px; }
+.v-question { padding: 20px; font-size: 18px; }
+.v-answer { padding: 0 20px 24px; }
 .feature-grid{grid-template-columns:1fr;gap:13px}
 .feature-card{min-height:310px}
 .steps-grid{grid-template-columns:1fr;gap:12px}
@@ -265,9 +249,8 @@ html{scroll-behavior:auto}
 .step-card h3{grid-column:2;grid-row:1;font-size:19px;margin:2px 0 8px}
 .step-card p{grid-column:2;grid-row:2}
 .google-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
-.faq-grid{grid-template-columns:1fr;gap:25px}
 .faq-question{font-size:14px;padding:18px 18px}
-.faq-answer{padding:0 45px 19px 18px}
+.faq-answer{padding:18px 18px}
 .contact{padding-bottom:65px}
 .contact-panel{grid-template-columns:1fr}
 .contact-info{padding:30px 24px}
@@ -282,11 +265,10 @@ html{scroll-behavior:auto}
 .logo-copy strong{font-size:11px}
 .logo-copy span{font-size:7px}
 .nav-actions{gap:7px}
-.nav-actions>.btn{padding:0 9px}
 .hero h1{font-size:42px}
 .hero-buttons{align-items:stretch;flex-direction:column}
 .hero-buttons .btn{width:100%}
-.hero-visual{min-height:400px} /* Dodatno smanjeno na malim ekranima */
+.hero-visual{min-height:400px} 
 }
 
 /* FINAL ADJUSTMENTS FOR HEADER & MENU */
@@ -309,7 +291,7 @@ body.menu-open .header .nav{min-height:0}
 .content-feature-grid .feature-copy h3{font-size:25px}
 }
 
-/* FULL-SCREEN MENU UPGRADE (Phone + IG) */
+/* FULL-SCREEN MENU UPGRADE */
 .nav-actions{gap:0}
 .nav-phone,.nav-actions>.btn{display:none!important}
 .menu-toggle{display:flex;position:relative;z-index:202;width:46px;height:46px;border-radius:50%;background:var(--paper);transition:background .2s,transform .2s}
@@ -320,7 +302,6 @@ body.menu-open .header .nav{min-height:0}
 .nav-links>a{width:min(100%,850px);padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink);font:800 clamp(29px,5.2vw,62px)/1.1 Manrope,sans-serif;letter-spacing:-2px}
 .nav-links>a:hover{padding-left:10px;color:#65685f}
 
-/* Nova kontakt dugmad u meniju */
 .nav-links .mobile-menu-actions { display: flex; flex-direction: row; gap: 12px; width: min(100%, 850px); margin-top: 35px; }
 .nav-links .mobile-btn { flex: 1; display: inline-flex; justify-content: center; align-items: center; min-height: 52px; border-radius: 6px; font: 800 13px Manrope, sans-serif; letter-spacing: 0.5px; text-decoration: none; border: 2px solid transparent; }
 .nav-links .mobile-btn-primary { background: var(--dark); color: #fff; }
@@ -353,7 +334,6 @@ body.menu-open .logo{visibility:hidden}
 <a href="#faq">FAQ</a>
 <a href="#kontakt">Kontakt</a>
 
-<!-- DVA DUGMETA U MENIJU: Telefon i Instagram -->
 <div class="mobile-menu-actions">
   <a class="mobile-btn mobile-btn-primary" href="tel:+381612045641">📞 061 204 56 41</a>
   <a class="mobile-btn mobile-btn-outline" href="https://www.instagram.com/rent_a_car_kragujevac__/?hl=en" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
@@ -388,102 +368,89 @@ onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-149214453
 Pronađite automobil za svoje planove uz jednostavan dogovor, pouzdana vozila i jasne uslove najma. Za grad, vikend ili duže putovanje.
 </p>
 
-<!-- DUGMIĆI BEZ STRELICA -->
 <div class="hero-buttons">
 <a href="#vozila" class="btn">Istražite vozila</a>
 <a href="tel:+381612045641" class="btn btn-outline">Pozovite za rezervaciju</a>
 </div>
 
-
 </div>
 </div>
 
 </div>
 </section>
 
-<div class="brand-strip">
-<div class="container brand-strip-inner">
-<span class="brand-name">RENAULT</span>
-<span class="brand-name">PEUGEOT</span>
-<span class="brand-name">SUV</span>
-<span class="brand-name">RENT A CAR KG</span>
-</div>
-</div>
-
+<!-- NOVI DIZAJN VOZILA (Harmonika sa presečenim uglom) -->
 <section class="section" id="vozila">
 <div class="container">
 
-<div class="section-head reveal">
-<div>
+<div class="section-head reveal" style="flex-direction: column; align-items: center; text-align: center; max-width: 100%; margin-bottom: 48px;">
 <span class="eyebrow">Naša ponuda</span>
-<h2>Izaberite automobil<br>za svoj sledeći put.</h2>
-</div>
-<div class="head-copy">
-<p>Tri pažljivo odabrana modela. Javite nam se da proverite cenu, raspoloživost i uslove najma.</p>
-<a href="#kontakt" class="text-link">Zatražite ponudu ↗</a>
-</div>
+<h2 style="margin-top:12px;">Izaberite automobil za svoj sledeći put.</h2>
+<p style="margin:0 auto;">Tri pažljivo odabrana modela. Javite nam se da proverite raspoloživost i uslove najma.</p>
 </div>
 
-<div class="vehicle-grid">
+<div class="vehicle-accordion-list reveal">
 
-<article class="vehicle-card reveal">
-<div class="vehicle-image" data-image-viewer data-caption="Renault Clio">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Renault_Clio_R.S._Line_%28V%29_%E2%80%93_f_17102021.jpg/1280px-Renault_Clio_R.S._Line_%28V%29_%E2%80%93_f_17102021.jpg"
-alt="Renault Clio"
-loading="lazy"
-onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80'">
-<span class="vehicle-tag">Gradska vožnja</span>
-<span class="vehicle-number">01 / 03</span>
-</div>
-<div class="vehicle-body">
-<div class="vehicle-meta"><span>RENAULT</span><span>HATCHBACK</span></div>
-<h3>Renault Clio</h3>
-<p>Kompaktan i praktičan izbor za gradske obaveze i kraća putovanja.</p>
-</div>
-</article>
+  <div class="v-item active">
+    <button class="v-question" aria-expanded="true">
+      <span>Renault Clio</span>
+      <span class="v-icon">+</span>
+    </button>
+    <div class="v-answer">
+      <div class="v-answer-inner">
+        <div class="v-image-wrapper" data-image-viewer data-caption="Renault Clio">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Renault_Clio_R.S._Line_%28V%29_%E2%80%93_f_17102021.jpg/1280px-Renault_Clio_R.S._Line_%28V%29_%E2%80%93_f_17102021.jpg" alt="Renault Clio" loading="lazy">
+        </div>
+        <div class="v-answer-content">
+          <h4>Gradska vožnja</h4>
+          <p>Kompaktan i praktičan izbor za gradske obaveze i kraća putovanja. Obezbeđuje lakše parkiranje i manju potrošnju goriva u gradskim uslovima.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<article class="vehicle-card reveal delay-1">
-<div class="vehicle-image" data-image-viewer data-caption="Renault Megane">
-<img src="https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/99_megane_sport.jpg?itok=-enB-8sO"
-alt="Renault Megane"
-loading="lazy"
-onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80'">
-<span class="vehicle-tag">Udobna vožnja</span>
-<span class="vehicle-number">02 / 03</span>
-</div>
-<div class="vehicle-body">
-<div class="vehicle-meta"><span>RENAULT</span><span>HATCHBACK</span></div>
-<h3>Renault Megane</h3>
-<p>Udoban izbor za svakodnevnu vožnju, poslovne obaveze i duže relacije.</p>
-</div>
-</article>
+  <div class="v-item">
+    <button class="v-question" aria-expanded="false">
+      <span>Renault Megane</span>
+      <span class="v-icon">+</span>
+    </button>
+    <div class="v-answer">
+      <div class="v-answer-inner">
+        <div class="v-image-wrapper" data-image-viewer data-caption="Renault Megane">
+          <img src="https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/99_megane_sport.jpg?itok=-enB-8sO" alt="Renault Megane" loading="lazy">
+        </div>
+        <div class="v-answer-content">
+          <h4>Udobna vožnja</h4>
+          <p>Udoban izbor za svakodnevnu vožnju, poslovne obaveze i duže relacije. Poseduje prostraniji enterijer i pruža visok nivo sigurnosti na otvorenim putevima.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<article class="vehicle-card reveal delay-2">
-<div class="vehicle-image" data-image-viewer data-caption="Peugeot 2008">
-<img src="https://spidervo.s3.fr-par.scw.cloud/photos/35f1e8316546c122a07d6b5d7c700d68/stock_500/image_2206735_1.jpg"
-alt="Peugeot 2008"
-loading="lazy"
-onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80'">
-<span class="vehicle-tag">SUV kategorija</span>
-<span class="vehicle-number">03 / 03</span>
-</div>
-<div class="vehicle-body">
-<div class="vehicle-meta"><span>PEUGEOT</span><span>2008 · SUV</span></div>
-<h3>Peugeot 2008</h3>
-<p>Moderan SUV za vožnju kroz grad i putovanja uz dodatnu praktičnost.</p>
-</div>
-</article>
+  <div class="v-item">
+    <button class="v-question" aria-expanded="false">
+      <span>Peugeot 2008</span>
+      <span class="v-icon">+</span>
+    </button>
+    <div class="v-answer">
+      <div class="v-answer-inner">
+        <div class="v-image-wrapper" data-image-viewer data-caption="Peugeot 2008">
+          <img src="https://spidervo.s3.fr-par.scw.cloud/photos/35f1e8316546c122a07d6b5d7c700d68/stock_500/image_2206735_1.jpg" alt="Peugeot 2008" loading="lazy">
+        </div>
+        <div class="v-answer-content">
+          <h4>SUV Kategorija</h4>
+          <p>Moderan SUV za vožnju kroz grad i putovanja uz dodatnu praktičnost. Povišen položaj sedenja pruža bolju preglednost, a prostran gepek dovoljno mesta za vaš prtljag.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
-
-<p class="fleet-note">
-Cene, tačne specifikacije i dostupnost proverite direktno sa Rent A Car KG. Fotografije služe kao prikaz modela i mogu se razlikovati od konkretnog vozila. Kliknite na fotografiju za veći prikaz.
-</p>
 
 </div>
 </section>
 
-<!-- PREDNOSTI: Slike iz unutrašnjosti auta -->
+<!-- PREDNOSTI -->
 <section class="section features" id="prednosti">
 <div class="container">
 
@@ -523,7 +490,7 @@ Cene, tačne specifikacije i dostupnost proverite direktno sa Rent A Car KG. Fot
 </div>
 </section>
 
-<!-- ČETIRI KORAKA: Redizajnirano ("Rocket" look, dark premium kartice) -->
+<!-- ČETIRI KORAKA -->
 <section class="section steps-section" id="proces">
 <div class="container">
 
@@ -577,7 +544,7 @@ Cene, tačne specifikacije i dostupnost proverite direktno sa Rent A Car KG. Fot
 </div>
 </section>
 
-<!-- RECENZIJE: Fake Google Reviews u Framer stilu -->
+<!-- RECENZIJE -->
 <section class="section review-section" id="recenzije">
 <div class="container">
 
@@ -645,15 +612,14 @@ Cene, tačne specifikacije i dostupnost proverite direktno sa Rent A Car KG. Fot
 </div>
 </section>
 
-<!-- FAQ: PROFI DIZAJN SA CRNOM IVICOM -->
+<!-- FAQ (Novi Centrirani dizajn sa jakim ivicama) -->
 <section class="section" id="faq">
 <div class="container faq-grid">
 
-<div class="faq-intro reveal">
-<span class="eyebrow">Česta pitanja</span>
-<h2>Pre nego što<br>krenete na put.</h2>
-<p>Niste sigurni koji automobil da izaberete ili želite da proverite uslove? Pozovite nas i dogovorite detalje direktno.</p>
-<a href="tel:+381612045641" class="btn btn-dark">Pitajte nas direktno</a>
+<div class="section-head reveal">
+  <span class="eyebrow">Česta pitanja</span>
+  <h2>Pre nego što krenete na put.</h2>
+  <p style="text-align:center;">Niste sigurni koji automobil da izaberete ili želite da proverite uslove? Pozovite nas i dogovorite detalje direktno.</p>
 </div>
 
 <div class="faq-list reveal">
@@ -783,7 +749,6 @@ menuIcon.innerHTML=open
 :'<path d="M4 7h16M4 12h16M4 17h16"/>';
 });
 
-// Sprečava da klik na nova kontakt dugmad slučajno zatvori meni dok se učitava (osim ako nisu anchor linkovi)
 mainNav.querySelectorAll('a:not(.mobile-btn)').forEach(a=>a.addEventListener('click',closeMenu));
 mainNav.addEventListener('click',e=>{if(e.target===mainNav)closeMenu();});
 
@@ -798,12 +763,12 @@ window.addEventListener('resize',()=>{
 if(innerWidth>760)closeMenu();
 });
 
-/* FAQ */
-document.querySelectorAll('.faq-question').forEach(btn=>{
+/* FAQ AKORDEON (Radi i za FAQ i za VOZILA) */
+document.querySelectorAll('.faq-question, .v-question').forEach(btn=>{
 btn.addEventListener('click',()=>{
-const item=btn.closest('.faq-item');
-const active=item.classList.toggle('active');
-btn.setAttribute('aria-expanded',String(active));
+const item = btn.closest('.faq-item, .v-item');
+const active = item.classList.toggle('active');
+btn.setAttribute('aria-expanded', String(active));
 });
 });
 
